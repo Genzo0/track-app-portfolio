@@ -11,6 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
+        <link rel="icon" href="/divisi.png" sizes="any" />
         <header className="bg-gray-900 text-white p-4 flex justify-between sm:px-40">
           <Link href={`/`}>
             <Image src={`/divisi.png`} width={90} height={50} />

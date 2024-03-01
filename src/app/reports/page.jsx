@@ -51,9 +51,24 @@ export default function Reports() {
                   Status
                 </th>
                 {/* For mobile view */}
-                <th className="py-2 px-4 text-left sm:hidden">No Resi</th>
-                <th className="py-2 px-4 text-left sm:hidden">Nama</th>
-                <th className="py-2 px-4 text-left sm:hidden">Status</th>
+                <th
+                  className="py-2 px-4 text-left sm:hidden"
+                  style={{ width: "40%" }}
+                >
+                  No Resi
+                </th>
+                <th
+                  className="py-2 px-4 text-left sm:hidden"
+                  style={{ width: "30%" }}
+                >
+                  Nama
+                </th>
+                <th
+                  className="py-2 px-4 text-left sm:hidden"
+                  style={{ width: "30%" }}
+                >
+                  Status
+                </th>
               </tr>
             </thead>
             <tbody>
