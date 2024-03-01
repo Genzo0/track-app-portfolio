@@ -43,10 +43,13 @@ export default function AddPage() {
     data.append("vendor", formData.vendor);
     data.append("photo", formData.photo);
 
-    const response = await fetch("/api/resi", {
-      method: "POST",
-      body: data,
-    });
+    const response = await fetch(
+      `https://track-app-backend.onrender.com/api/resi`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
 
     const result = await response.json();
     if (response.status === 201) {

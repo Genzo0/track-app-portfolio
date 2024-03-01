@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <div className="flex-1 p-8 text-white bg-gradient-to-r from-cyan-500 to-cyan-900 flex flex-col items-center justify-center sm:flex-row sm:text-left">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className="text-3xl font-bold mb-4">Track Resi</h2>
+          <h2 className="text-3xl font-bold mb-4">Riwayat RIZPEG UB</h2>
           <p className="mb-6 text-center sm:text-left">
             Cara mudah untuk menambah, menerima, dan mengelola data pengiriman
             Anda.

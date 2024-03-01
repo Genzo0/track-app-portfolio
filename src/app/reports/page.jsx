@@ -9,7 +9,9 @@ export default function Reports() {
     // Fetch data for the report table
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/resi");
+        const response = await fetch(
+          `https://track-app-backend.onrender.com/api/resi`
+        );
         if (response.ok) {
           const jsonData = await response.json();
           setData(jsonData);
@@ -89,7 +91,7 @@ export default function Reports() {
                     </td>
                     <td className="py-2 px-4 hidden sm:table-cell">
                       <img
-                        src={`${item.photo}`}
+                        src={`https://track-app-backend.onrender.com${item.photo}`}
                         alt={item.name}
                         className="w-20 h-20 object-cover rounded"
                       />

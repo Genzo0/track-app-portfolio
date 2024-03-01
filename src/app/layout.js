@@ -13,10 +13,10 @@ export default function RootLayout({ children }) {
       <body className="flex flex-col min-h-screen">
         <link rel="icon" href="/divisi.png" sizes="any" />
         <header className="bg-gray-900 text-white p-4 flex justify-between sm:px-40">
+          <Image src={`/brawijaya.png`} width={50} height={50} />
           <Link href={`/`}>
             <Image src={`/divisi.png`} width={90} height={50} />
           </Link>
-          <Image src={`/brawijaya.png`} width={50} height={50} />
         </header>
         {children}
         <footer className="bg-gray-900 text-white p-4 text-center">
