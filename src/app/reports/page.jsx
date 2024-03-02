@@ -10,7 +10,9 @@ export default function Reports() {
     // Fetch data for the report table
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://103.127.135.66:5000/api/resi`);
+        const response = await fetch(
+          `https://www.genzoproject.biz.id/api/resi`
+        );
         if (response.ok) {
           const jsonData = await response.json();
           setData(jsonData);
@@ -105,7 +107,7 @@ export default function Reports() {
                     </td>
                     <td className="py-2 px-4 hidden sm:table-cell">
                       <img
-                        src={`http://103.127.135.66:5000${item.photo}`}
+                        src={`https://www.genzoproject.biz.id${item.photo}`}
                         alt={item.name}
                         className="w-20 h-20 object-cover rounded"
                       />
