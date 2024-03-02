@@ -38,13 +38,13 @@ export default function Reports() {
                   No Resi
                 </th>
                 <th className="py-2 px-4 text-left hidden sm:table-cell">
-                  Nama
+                  Nama Tujuan
                 </th>
                 <th className="py-2 px-4 text-left hidden sm:table-cell">
                   No Telp
                 </th>
                 <th className="py-2 px-4 text-left hidden sm:table-cell">
-                  Vendor
+                  Ekspedisi
                 </th>
                 <th className="py-2 px-4 text-left hidden sm:table-cell">
                   Gambar
@@ -63,7 +63,7 @@ export default function Reports() {
                   className="py-2 px-4 text-left sm:hidden"
                   style={{ width: "30%" }}
                 >
-                  Nama
+                  Nama Tujuan
                 </th>
                 <th
                   className="py-2 px-4 text-left sm:hidden"
@@ -76,7 +76,7 @@ export default function Reports() {
             <tbody>
               {data.length > 0 ? (
                 data.map((item) => (
-                  <tr key={item.id} className="bg-gray-700">
+                  <tr key={item._id} className="bg-gray-700">
                     <td className="py-2 px-4 hidden sm:table-cell">
                       {item.noResi}
                     </td>

@@ -22,11 +22,11 @@ export default function ReceivePage() {
       const response = await fetch(
         `https://track-app-backend.onrender.com/api/resi/${noResi}`
       );
-      if (response.ok) {
-        const data = await response.json();
+      const data = await response.json();
+      if (response.status === 200) {
         setReceivedData(data);
       } else {
-        setError("No Resi tidak ditemukan");
+        setError(data.message);
         setReceivedData(null);
         setTimeout(() => {
           setError("");
@@ -119,11 +119,11 @@ export default function ReceivePage() {
               />
             </div>
             <div>
-              <h2 className="text-xl font-bold mb-2">Received Data</h2>
+              <h2 className="text-xl font-bold mb-2">Data Resi</h2>
               <p>No Resi: {receivedData.noResi}</p>
-              <p>Name: {receivedData.name}</p>
+              <p>Nama Tujuan: {receivedData.name}</p>
               <p>Telp: {receivedData.telp}</p>
-              <p>Vendor: {receivedData.vendor}</p>
+              <p>Ekspedisi: {receivedData.vendor}</p>
             </div>
             <button
               onClick={handleTerimaResi}

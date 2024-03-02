@@ -51,8 +51,8 @@ export default function AddPage() {
       }
     );
 
-    const result = await response.json();
     if (response.status === 201) {
+      const result = await response.json();
       setSuccess(result.message);
       setTimeout(() => {
         setFormData({
@@ -66,7 +66,8 @@ export default function AddPage() {
         router.push("/");
       }, 1000);
     } else {
-      setError(response.message);
+      const result = await response.json();
+      setError(result.message);
       setTimeout(() => {
         setError("");
       }, 2000);
@@ -110,7 +111,7 @@ export default function AddPage() {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Nama
+              Nama Tujuan
             </label>
             <input
               type="text"
@@ -144,7 +145,7 @@ export default function AddPage() {
               htmlFor="vendor"
               className="block text-sm font-medium text-gray-700"
             >
-              Vendor
+              Ekspedisi
             </label>
             <input
               type="text"
