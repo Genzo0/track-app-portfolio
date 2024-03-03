@@ -47,6 +47,14 @@ export default function DetailPage({ params }) {
                 <p className="mb-2">Nama Tujuan: {data.name}</p>
                 <p className="mb-2">Telp: {data.telp}</p>
                 <p className="mb-2">Ekspedisi: {data.vendor}</p>
+                <p className="mb-2">
+                  Status:{" "}
+                  {data.isAccepted ? (
+                    <span className="text-green-500">Sudah diterima</span>
+                  ) : (
+                    <span className="text-red-500">Belum diterima</span>
+                  )}
+                </p>
               </div>
             </div>
           </div>
