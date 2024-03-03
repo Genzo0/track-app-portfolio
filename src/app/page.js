@@ -5,8 +5,8 @@ export default function Home() {
     <>
       <div className="flex-1 p-8 text-white bg-gradient-to-r from-cyan-500 to-cyan-900 flex flex-col items-center justify-center sm:flex-row sm:text-left">
         <div className="flex flex-col items-center justify-center ">
-          <h2 className="text-3xl font-bold mb-4">RIZPEG UB</h2>
-          <h3 className="text-2xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-center">RISPEG UB</h2>
+          <h3 className="text-2xl font-bold mb-4 text-center">
             Riwayat Ekspedisi Pegawai UB
           </h3>
           <p className="mb-6 text-center sm:text-left">

@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Reports() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     // Fetch data for the report table
@@ -92,7 +95,11 @@ export default function Reports() {
             <tbody>
               {filteredReport.length > 0 ? (
                 filteredReport.map((item) => (
-                  <tr key={item._id} className="bg-gray-700">
+                  <tr
+                    key={item._id}
+                    className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
+                    onClick={() => router.push(`/resi/${item.noResi}`)}
+                  >
                     <td className="py-2 px-4 hidden sm:table-cell">
                       {item.noResi}
                     </td>

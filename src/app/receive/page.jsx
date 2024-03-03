@@ -16,7 +16,8 @@ export default function ReceivePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setSuccess("");
+    setError("");
     // Here you can perform the fetch request to get the data based on the No Resi
     try {
       const response = await fetch(
@@ -25,6 +26,9 @@ export default function ReceivePage() {
       const data = await response.json();
       if (response.status === 200) {
         setReceivedData(data);
+        if (data.isAccepted) {
+          setSuccess("Resi sudah diterima");
+        }
       } else {
         setError(data.message);
         setReceivedData(null);
@@ -88,7 +92,10 @@ export default function ReceivePage() {
         )}
 
         {/* Form for entering No Resi */}
-        <div className="flex flex-col sm:flex-row sm:items-center mb-4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row sm:items-center mb-4"
+        >
           <input
             type="text"
             id="noResi"
@@ -96,14 +103,12 @@ export default function ReceivePage() {
             onChange={handleChange}
             className="border border-gray-300 rounded-md p-2 mb-2 sm:mb-0 sm:mr-2 flex-grow text-black"
             placeholder="Masukkan No Resi"
+            required
           />
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-          >
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
             Cari
           </button>
-        </div>
+        </form>
 
         {/* Display received data */}
         {receivedData && (
@@ -122,12 +127,14 @@ export default function ReceivePage() {
               <p>Telp: {receivedData.telp}</p>
               <p>Ekspedisi: {receivedData.vendor}</p>
             </div>
-            <button
-              onClick={handleTerimaResi}
-              className="bg-green-500 text-white px-4 py-2 rounded-md mt-4 sm:mt-0 ml-auto"
-            >
-              Terima Resi
-            </button>
+            {!receivedData.isAccepted && (
+              <button
+                onClick={handleTerimaResi}
+                className="bg-green-500 text-white px-4 py-2 rounded-md mt-4 sm:mt-0 ml-auto"
+              >
+                Terima Resi
+              </button>
+            )}
           </div>
         )}
       </div>
