@@ -94,58 +94,61 @@ export default function Reports() {
             </thead>
             <tbody>
               {filteredReport.length > 0 ? (
-                filteredReport.map((item) => (
-                  <tr
-                    key={item._id}
-                    className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
-                    onClick={() => router.push(`/resi/${item.noResi}`)}
-                  >
-                    <td className="py-2 px-4 hidden sm:table-cell">
-                      {item.noResi}
-                    </td>
-                    <td className="py-2 px-4 hidden sm:table-cell">
-                      {item.name}
-                    </td>
-                    <td className="py-2 px-4 hidden sm:table-cell">
-                      {item.telp}
-                    </td>
-                    <td className="py-2 px-4 hidden sm:table-cell">
-                      {item.vendor}
-                    </td>
-                    <td className="py-2 px-4 hidden sm:table-cell">
-                      <img
-                        src={`https://www.genzoproject.biz.id${item.photo}`}
-                        alt={item.name}
-                        className="w-20 h-20 object-cover rounded"
-                      />
-                    </td>
-                    <td className="py-2 px-4 hidden sm:table-cell">
-                      {item.isAccepted ? (
-                        <span className="bg-green-500 text-white p-1 rounded">
-                          Sudah diterima
-                        </span>
-                      ) : (
-                        <span className="bg-red-500 text-white p-1 rounded">
-                          Belum diterima
-                        </span>
-                      )}
-                    </td>
-                    {/* For mobile view */}
-                    <td className="py-2 px-4 sm:hidden">{item.noResi}</td>
-                    <td className="py-2 px-4 sm:hidden">{item.name}</td>
-                    <td className="py-2 px-4 sm:hidden">
-                      {item.isAccepted ? (
-                        <span className="bg-green-500 text-white p-1 rounded">
-                          Sudah diterima
-                        </span>
-                      ) : (
-                        <span className="bg-red-500 text-white p-1 rounded">
-                          Belum diterima
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))
+                filteredReport
+                  .slice()
+                  .reverse()
+                  .map((item) => (
+                    <tr
+                      key={item._id}
+                      className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
+                      onClick={() => router.push(`/resi/${item.noResi}`)}
+                    >
+                      <td className="py-2 px-4 hidden sm:table-cell">
+                        {item.noResi}
+                      </td>
+                      <td className="py-2 px-4 hidden sm:table-cell">
+                        {item.name}
+                      </td>
+                      <td className="py-2 px-4 hidden sm:table-cell">
+                        {item.telp}
+                      </td>
+                      <td className="py-2 px-4 hidden sm:table-cell">
+                        {item.vendor}
+                      </td>
+                      <td className="py-2 px-4 hidden sm:table-cell">
+                        <img
+                          src={`https://www.genzoproject.biz.id${item.photo}`}
+                          alt={item.name}
+                          className="w-20 h-20 object-cover rounded"
+                        />
+                      </td>
+                      <td className="py-2 px-4 hidden sm:table-cell">
+                        {item.isAccepted ? (
+                          <span className="bg-green-500 text-white p-1 rounded">
+                            Sudah diterima
+                          </span>
+                        ) : (
+                          <span className="bg-red-500 text-white p-1 rounded">
+                            Belum diterima
+                          </span>
+                        )}
+                      </td>
+                      {/* For mobile view */}
+                      <td className="py-2 px-4 sm:hidden">{item.noResi}</td>
+                      <td className="py-2 px-4 sm:hidden">{item.name}</td>
+                      <td className="py-2 px-4 sm:hidden">
+                        {item.isAccepted ? (
+                          <span className="bg-green-500 text-white p-1 rounded">
+                            Sudah diterima
+                          </span>
+                        ) : (
+                          <span className="bg-red-500 text-white p-1 rounded">
+                            Belum diterima
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))
               ) : (
                 <tr>
                   <td colSpan="6" className="py-4 text-center text-3xl">
