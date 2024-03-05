@@ -101,7 +101,7 @@ export default function Reports() {
                     <tr
                       key={item._id}
                       className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
-                      onClick={() => router.push(`/resi/${item.noResi}`)}
+                      onDoubleClick={() => router.push(`/resi/${item.noResi}`)}
                     >
                       <td className="py-2 px-4 hidden sm:table-cell">
                         {item.noResi}
