@@ -103,26 +103,26 @@ export default function Reports() {
                       className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
                       onDoubleClick={() => router.push(`/resi/${item.noResi}`)}
                     >
-                      <td className="py-2 px-4 hidden sm:table-cell">
+                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
                         {item.noResi}
                       </td>
-                      <td className="py-2 px-4 hidden sm:table-cell">
+                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
                         {item.name}
                       </td>
-                      <td className="py-2 px-4 hidden sm:table-cell">
+                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
                         {item.telp}
                       </td>
-                      <td className="py-2 px-4 hidden sm:table-cell">
+                      <td className="py-2 px-4 hidden sm:table-cell w-1/12 break-words">
                         {item.vendor}
                       </td>
-                      <td className="py-2 px-4 hidden sm:table-cell">
+                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
                         <img
                           src={`https://www.genzoproject.biz.id${item.photo}`}
                           alt={item.name}
                           className="w-20 h-20 object-cover rounded"
                         />
                       </td>
-                      <td className="py-2 px-4 hidden sm:table-cell">
+                      <td className="py-2 px-4 hidden sm:table-cell w-2/12 break-words">
                         {item.isAccepted ? (
                           <span className="bg-green-500 text-white p-1 rounded">
                             Sudah diterima
@@ -134,9 +134,13 @@ export default function Reports() {
                         )}
                       </td>
                       {/* For mobile view */}
-                      <td className="py-2 px-4 sm:hidden">{item.noResi}</td>
-                      <td className="py-2 px-4 sm:hidden">{item.name}</td>
-                      <td className="py-2 px-4 sm:hidden">
+                      <td className="py-2 px-4 sm:hidden w-2/5 break-words">
+                        {item.noResi}
+                      </td>
+                      <td className="py-2 px-4 sm:hidden w-2/5 break-words">
+                        {item.name}
+                      </td>
+                      <td className="py-2 px-4 sm:hidden w-1/5">
                         {item.isAccepted ? (
                           <span className="bg-green-500 text-white p-1 rounded">
                             Sudah diterima
@@ -151,8 +155,11 @@ export default function Reports() {
                   ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="py-4 text-center text-3xl">
-                    Belum ada data
+                  <td
+                    colSpan="6"
+                    className="py-4 text-center text-3xl text-blue-300 font-bold"
+                  >
+                    Loading...
                   </td>
                 </tr>
               )}
