@@ -21,7 +21,7 @@ export default function ReceivePage() {
     // Here you can perform the fetch request to get the data based on the No Resi
     try {
       const response = await fetch(
-        `https://www.genzoproject.biz.id/api/resi/${noResi}`
+        `https://www.genzoproject.my.id/api/resi/${noResi}`
       );
       const data = await response.json();
       if (response.status === 200) {
@@ -46,7 +46,7 @@ export default function ReceivePage() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://www.genzoproject.biz.id/api/resi`, {
+      const response = await fetch(`https://www.genzoproject.my.id/api/resi`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export default function ReceivePage() {
           <div className="bg-white bg-opacity-25 rounded-lg shadow-md p-4 mb-4 flex flex-col sm:flex-row items-center">
             <div className="mb-4 sm:mr-4 sm:mb-0">
               <img
-                src={`https://www.genzoproject.biz.id${receivedData.photo}`}
+                src={`https://www.genzoproject.my.id${receivedData.photo}`}
                 alt="Received Data"
                 className="w-32 h-32 object-cover rounded"
               />
