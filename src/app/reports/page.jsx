@@ -162,7 +162,7 @@ export default function Reports() {
                     colSpan="6"
                     className="py-4 text-center text-3xl text-blue-300 font-bold"
                   >
-                    Tidak ada data...
+                    Loading...
                   </td>
                 </tr>
               )}
