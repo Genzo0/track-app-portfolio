@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
@@ -11,7 +11,6 @@ export default function Reports() {
   );
   const [pagination, setPagination] = useState({});
   const [page, setPage] = useState(useSearchParams().get("page") || 1);
-  const [limit, setLimit] = useState(useSearchParams().get("limit") || 10);
 
   const router = useRouter();
 
@@ -19,7 +18,7 @@ export default function Reports() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/resi?page=${page}&limit=${limit}&search=${searchTerm}`
+          `https://genzoproject.my.id/api/resi?page=${page}&search=${searchTerm}`
         );
         if (response.ok) {
           const jsonData = await response.json();
@@ -34,24 +33,26 @@ export default function Reports() {
     };
 
     fetchData();
-  }, [page, limit, searchTerm]);
+  }, [page, searchTerm]);
 
   return (
     <div className="flex-1 p-8 text-white bg-gradient-to-r from-cyan-400 to-cyan-900">
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-4">Laporan Resi</h1>
         <div className="flex justify-end items-center mb-3">
-          <input
-            type="text"
-            name="searchTerm"
-            placeholder="Cari berdasarkan No Resi atau Nama Tujuan"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setPage(1);
-            }}
-            className="bg-gray-300 bg-opacity-50 border border-gray-300 text-white placeholder-slate-600 text-sm rounded-lg w-96 p-2"
-          />
+          <Suspense>
+            <input
+              type="text"
+              name="searchTerm"
+              placeholder="Cari berdasarkan No Resi atau Nama Tujuan"
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setPage(1);
+              }}
+              className="bg-gray-300 bg-opacity-50 border border-gray-300 text-white placeholder-slate-600 text-sm rounded-lg w-96 p-2"
+            />
+          </Suspense>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full table-fixed">
@@ -169,24 +170,26 @@ export default function Reports() {
               )}
             </tbody>
           </table>
-          <div className="flex justify-center items-center mt-5">
-            {[...Array(pagination.totalPages)].map((_, index) => {
-              return (
-                <div
-                  key={index}
-                  onClick={() => setPage(index + 1)}
-                  disabled={pagination.currentPage === index + 1}
-                  className={`${
-                    pagination.currentPage === index + 1
-                      ? "bg-white/50"
-                      : "bg-white/10"
-                  } border px-5 py-3 border-white cursor-pointer`}
-                >
-                  {index + 1}
-                </div>
-              );
-            })}
-          </div>
+          <Suspense>
+            <div className="flex justify-center items-center mt-5">
+              {[...Array(pagination.totalPages)].map((_, index) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => setPage(index + 1)}
+                    disabled={pagination.currentPage === index + 1}
+                    className={`${
+                      pagination.currentPage === index + 1
+                        ? "bg-white/50"
+                        : "bg-white/10"
+                    } border px-5 py-3 border-white cursor-pointer`}
+                  >
+                    {index + 1}
+                  </div>
+                );
+              })}
+            </div>
+          </Suspense>
         </div>
       </div>
     </div>
