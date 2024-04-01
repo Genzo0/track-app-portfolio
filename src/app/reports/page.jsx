@@ -1,23 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, use } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 export default function Reports() {
   const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(
+    useSearchParams().get("search") || ""
+  );
+  const [pagination, setPagination] = useState({});
+  const [page, setPage] = useState(useSearchParams().get("page") || 1);
+  const [limit, setLimit] = useState(useSearchParams().get("limit") || 10);
 
   const router = useRouter();
 
   useEffect(() => {
-    // Fetch data for the report table
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://www.genzoproject.my.id/api/resi`);
+        const response = await fetch(
+          `http://localhost:5000/api/resi?page=${page}&limit=${limit}&search=${searchTerm}`
+        );
         if (response.ok) {
           const jsonData = await response.json();
-          setData(jsonData);
+          setData(jsonData.resi);
+          setPagination(jsonData.pagination);
         } else {
           console.error("Failed to fetch data");
         }
@@ -27,13 +34,7 @@ export default function Reports() {
     };
 
     fetchData();
-  }, []);
-
-  const filteredReport = data.filter(
-    (item) =>
-      item.noResi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  }, [page, limit, searchTerm]);
 
   return (
     <div className="flex-1 p-8 text-white bg-gradient-to-r from-cyan-400 to-cyan-900">
@@ -42,9 +43,13 @@ export default function Reports() {
         <div className="flex justify-end items-center mb-3">
           <input
             type="text"
+            name="searchTerm"
             placeholder="Cari berdasarkan No Resi atau Nama Tujuan"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setPage(1);
+            }}
             className="bg-gray-300 bg-opacity-50 border border-gray-300 text-white placeholder-slate-600 text-sm rounded-lg w-96 p-2"
           />
         </div>
@@ -92,81 +97,96 @@ export default function Reports() {
               </tr>
             </thead>
             <tbody>
-              {filteredReport.length > 0 ? (
-                filteredReport
-                  .slice()
-                  .reverse()
-                  .map((item) => (
-                    <tr
-                      key={item._id}
-                      className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
-                      onDoubleClick={() => router.push(`/resi/${item.noResi}`)}
-                    >
-                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
-                        {item.noResi}
-                      </td>
-                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
-                        {item.name}
-                      </td>
-                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
-                        {item.telp}
-                      </td>
-                      <td className="py-2 px-4 hidden sm:table-cell w-1/12 break-words">
-                        {item.vendor}
-                      </td>
-                      <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
-                        <Image
-                          src={`https://www.genzoproject.my.id${item.photo}`}
-                          alt={item.name}
-                          width={200}
-                          height={200}
-                          quality={20}
-                          className="rounded-lg"
-                        />
-                      </td>
-                      <td className="py-2 px-4 hidden sm:table-cell w-2/12 break-words">
-                        {item.isAccepted ? (
-                          <span className="bg-green-500 text-white p-1 rounded">
-                            Sudah diterima
-                          </span>
-                        ) : (
-                          <span className="bg-red-500 text-white p-1 rounded">
-                            Belum diterima
-                          </span>
-                        )}
-                      </td>
-                      {/* For mobile view */}
-                      <td className="py-2 px-4 sm:hidden w-2/5 break-words">
-                        {item.noResi}
-                      </td>
-                      <td className="py-2 px-4 sm:hidden w-2/5 break-words">
-                        {item.name}
-                      </td>
-                      <td className="py-2 px-4 sm:hidden w-1/5">
-                        {item.isAccepted ? (
-                          <span className="bg-green-500 text-white p-1 rounded">
-                            Sudah diterima
-                          </span>
-                        ) : (
-                          <span className="bg-red-500 text-white p-1 rounded">
-                            Belum diterima
-                          </span>
-                        )}
-                      </td>
-                    </tr>
-                  ))
+              {data.length > 0 ? (
+                data.slice().map((item) => (
+                  <tr
+                    key={item._id}
+                    className="bg-gray-700 hover:bg-gray-600 cursor-pointer"
+                    onDoubleClick={() => router.push(`/resi/${item.noResi}`)}
+                  >
+                    <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
+                      {item.noResi}
+                    </td>
+                    <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
+                      {item.name}
+                    </td>
+                    <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
+                      {item.telp}
+                    </td>
+                    <td className="py-2 px-4 hidden sm:table-cell w-1/12 break-words">
+                      {item.vendor}
+                    </td>
+                    <td className="py-2 px-4 hidden sm:table-cell w-1/5 break-words">
+                      <Image
+                        src={`https://www.genzoproject.my.id${item.photo}`}
+                        alt={item.name}
+                        width={100}
+                        height={100}
+                        quality={20}
+                        className="rounded-lg"
+                      />
+                    </td>
+                    <td className="py-2 px-4 hidden sm:table-cell w-2/12 break-words">
+                      {item.isAccepted ? (
+                        <span className="bg-green-500 text-white p-1 rounded">
+                          Sudah diterima
+                        </span>
+                      ) : (
+                        <span className="bg-red-500 text-white p-1 rounded">
+                          Belum diterima
+                        </span>
+                      )}
+                    </td>
+                    {/* For mobile view */}
+                    <td className="py-2 px-4 sm:hidden w-2/5 break-words">
+                      {item.noResi}
+                    </td>
+                    <td className="py-2 px-4 sm:hidden w-2/5 break-words">
+                      {item.name}
+                    </td>
+                    <td className="py-2 px-4 sm:hidden w-1/5">
+                      {item.isAccepted ? (
+                        <span className="bg-green-500 text-white p-1 rounded">
+                          Sudah diterima
+                        </span>
+                      ) : (
+                        <span className="bg-red-500 text-white p-1 rounded">
+                          Belum diterima
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td
                     colSpan="6"
                     className="py-4 text-center text-3xl text-blue-300 font-bold"
                   >
-                    Loading...
+                    Tidak ada data...
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
+          <div className="flex justify-center items-center mt-5">
+            {[...Array(pagination.totalPages)].map((_, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => setPage(index + 1)}
+                  disabled={pagination.currentPage === index + 1}
+                  className={`${
+                    pagination.currentPage === index + 1
+                      ? "bg-white/50"
+                      : "bg-white/10"
+                  } border px-5 py-3 border-white cursor-pointer`}
+                >
+                  {index + 1}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
