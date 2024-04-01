@@ -1,16 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Reports() {
   const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(
-    useSearchParams().get("search") || ""
-  );
+  const [searchTerm, setSearchTerm] = useState("");
   const [pagination, setPagination] = useState({});
-  const [page, setPage] = useState(useSearchParams().get("page") || 1);
+  const [page, setPage] = useState(1);
 
   const router = useRouter();
 
