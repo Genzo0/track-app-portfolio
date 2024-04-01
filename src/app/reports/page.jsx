@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
@@ -40,19 +40,17 @@ export default function Reports() {
       <div className="container mx-auto">
         <h1 className="text-3xl font-bold mb-4">Laporan Resi</h1>
         <div className="flex justify-end items-center mb-3">
-          <Suspense>
-            <input
-              type="text"
-              name="searchTerm"
-              placeholder="Cari berdasarkan No Resi atau Nama Tujuan"
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setPage(1);
-              }}
-              className="bg-gray-300 bg-opacity-50 border border-gray-300 text-white placeholder-slate-600 text-sm rounded-lg w-96 p-2"
-            />
-          </Suspense>
+          <input
+            type="text"
+            name="searchTerm"
+            placeholder="Cari berdasarkan No Resi atau Nama Tujuan"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setPage(1);
+            }}
+            className="bg-gray-300 bg-opacity-50 border border-gray-300 text-white placeholder-slate-600 text-sm rounded-lg w-96 p-2"
+          />
         </div>
         <div className="overflow-x-auto">
           <table className="w-full table-fixed">
@@ -170,26 +168,24 @@ export default function Reports() {
               )}
             </tbody>
           </table>
-          <Suspense>
-            <div className="flex justify-center items-center mt-5">
-              {[...Array(pagination.totalPages)].map((_, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() => setPage(index + 1)}
-                    disabled={pagination.currentPage === index + 1}
-                    className={`${
-                      pagination.currentPage === index + 1
-                        ? "bg-white/50"
-                        : "bg-white/10"
-                    } border px-5 py-3 border-white cursor-pointer`}
-                  >
-                    {index + 1}
-                  </div>
-                );
-              })}
-            </div>
-          </Suspense>
+          <div className="flex justify-center items-center mt-5">
+            {[...Array(pagination.totalPages)].map((_, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => setPage(index + 1)}
+                  disabled={pagination.currentPage === index + 1}
+                  className={`${
+                    pagination.currentPage === index + 1
+                      ? "bg-white/50"
+                      : "bg-white/10"
+                  } border px-5 py-3 border-white cursor-pointer`}
+                >
+                  {index + 1}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
