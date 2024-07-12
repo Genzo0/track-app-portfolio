@@ -15,9 +15,7 @@ export default function Reports() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `https://genzoproject.my.id/api/resi?page=${page}&search=${searchTerm}`
-        );
+        const response = await fetch(``);
         if (response.ok) {
           const jsonData = await response.json();
           setData(jsonData.resi);

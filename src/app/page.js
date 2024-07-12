@@ -5,6 +5,9 @@ export default function Home() {
     <>
       <div className="flex-1 p-8 text-white bg-gradient-to-r from-cyan-500 to-cyan-900 flex flex-col items-center justify-center sm:flex-row sm:text-left">
         <div className="flex flex-col items-center justify-center ">
+          <div className="bg-red-300 p-5 font-bold">
+            For security purposes, all functional is disabled!
+          </div>
           <h2 className="text-3xl font-bold mb-4 text-center">RISPEG UB</h2>
           <h3 className="text-2xl font-bold mb-4 text-center">
             Riwayat Ekspedisi Pegawai UB
